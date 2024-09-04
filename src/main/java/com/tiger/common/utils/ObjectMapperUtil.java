@@ -27,6 +27,7 @@ public final class ObjectMapperUtil {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
         mapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
         return mapper;
     }
