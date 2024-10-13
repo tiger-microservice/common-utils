@@ -1,11 +1,11 @@
 package com.tiger.common.utils;
 
+import java.security.SecureRandom;
+import java.util.Base64;
+
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
-
-import java.security.SecureRandom;
-import java.util.Base64;
 
 public final class JasyptUtil {
     public static StringEncryptor stringEncryptor(String password) {

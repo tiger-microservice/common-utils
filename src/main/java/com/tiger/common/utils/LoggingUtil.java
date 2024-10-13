@@ -1,10 +1,10 @@
 package com.tiger.common.utils;
 
-import org.apache.commons.text.StringEscapeUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.apache.commons.text.StringEscapeUtils;
 
 public class LoggingUtil {
 
