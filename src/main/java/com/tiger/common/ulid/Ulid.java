@@ -813,5 +813,4 @@ public final class Ulid implements Serializable, Comparable<Ulid> {
 
         return true; // It seems to be OK.
     }
-
 }
