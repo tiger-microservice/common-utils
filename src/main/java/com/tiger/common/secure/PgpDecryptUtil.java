@@ -10,11 +10,14 @@ import org.bouncycastle.util.io.Streams;
 import java.io.*;
 import java.security.Security;
 import java.util.Iterator;
+import java.util.logging.Logger;
 
 public class PgpDecryptUtil {
 
+    private static Logger logger = Logger.getLogger(PgpDecryptUtil.class.getName());
+
     public static void decrypt(InputStream instream, InputStream privateKeyInStream,
-                               String password, OutputStream outputStream) throws IOException {
+                               String password, OutputStream outputStream) throws IOException, PGPException {
         Security.addProvider(new BouncyCastleProvider());
         instream = PGPUtil.getDecoderStream(instream);
 
@@ -57,21 +60,18 @@ public class PgpDecryptUtil {
                 throw new PGPException("message is not a simple encrypted file - type unknown.");
             }
             if (pbe.isIntegrityProtected() && pbe.verify()) {
-                System.out.println("message integrity check passed");
+                logger.info("message integrity check passed");
             } else {
-                System.out.println("message integrity check failed");
+                logger.info("message integrity check failed");
             }
-        } catch (PGPException e) {
-            System.out.println(e.getMessage());
-            // TODO: throw PGPException
         } finally {
             privateKeyInStream.close();
             instream.close();
         }
     }
 
-    public static void decryptFile(String encryptedInputFileName, String privateKeyFileName, char[] passPhrase,
-                                   String defaultFileName) throws IOException {
+    public static void decrypt(String encryptedInputFileName, String privateKeyFileName, char[] passPhrase,
+                                   String defaultFileName) throws IOException, PGPException {
         InputStream mainstream = new BufferedInputStream(new FileInputStream(encryptedInputFileName));
         InputStream privateKeyInStream = new BufferedInputStream(new FileInputStream(privateKeyFileName));
         OutputStream fOut = new FileOutputStream(defaultFileName);

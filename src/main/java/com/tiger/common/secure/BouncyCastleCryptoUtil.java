@@ -46,7 +46,7 @@ public class BouncyCastleCryptoUtil {
     public static byte[] signData(byte[] data, final X509Certificate signingCertificate,
                                   final PrivateKey signingKey) throws CertificateEncodingException,
             OperatorCreationException, CMSException, IOException {
-        byte[] signedMessage = null;
+        byte[] signedMessage;
         List<X509Certificate> certList = new ArrayList<>();
         CMSTypedData cmsData = new CMSProcessableByteArray(data);
         certList.add(signingCertificate);

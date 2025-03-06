@@ -2,6 +2,8 @@ package com.tiger.common.utils;
 
 public final class StringMaskerUtil {
 
+    private StringMaskerUtil() {}
+
     /**
      * Thay thế một số ký tự ở đầu và cuối chuỗi bằng dấu '*'.
      *
@@ -19,7 +21,7 @@ public final class StringMaskerUtil {
         int length = str.length();
 
         // Nếu x + y lớn hơn hoặc bằng độ dài chuỗi, trả về toàn dấu '*'
-        if (x + y >= length) {
+        if (x + y >= length || x < 0 || y < 0 || (x + y == 0)) {
             return "*".repeat(length);
         }
 

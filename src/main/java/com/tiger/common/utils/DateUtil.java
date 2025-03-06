@@ -14,4 +14,12 @@ public class DateUtil {
         // Convert to string
         return dateTime.format(formatter);
     }
+
+    private static LocalDateTime stringToLocaldateTime(String inputDate) {
+        if (inputDate == null || inputDate.isEmpty()) return null;
+
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[.SSS]");
+
+        return LocalDateTime.parse(inputDate, inputFormatter);
+    }
 }

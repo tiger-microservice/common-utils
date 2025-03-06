@@ -38,7 +38,6 @@ public class PGPCoreUtil {
         } finally {
             pgpLiteralDataGenerator.close();
         }
-
     }
 
     /**
@@ -112,18 +111,6 @@ public class PGPCoreUtil {
      * @throws PGPException if there is an issue parsing the input stream.
      */
     static PGPSecretKey readSecretKey(InputStream input) throws IOException, PGPException {
-        PGPSecretKeyRingCollection pgpSec = new PGPSecretKeyRingCollection(PGPUtil.getDecoderStream(input), new JcaKeyFingerprintCalculator());
-        Iterator<PGPSecretKeyRing> keyRingIter = pgpSec.getKeyRings();
-        while (keyRingIter.hasNext()) {
-            PGPSecretKeyRing keyRing = keyRingIter.next();
-            Iterator<PGPSecretKey> keyIter = keyRing.getSecretKeys();
-            while (keyIter.hasNext()) {
-                PGPSecretKey key = keyIter.next();
-                if (key.isSigningKey()) {
-                    return key;
-                }
-            }
-        }
-        throw new IllegalArgumentException("Can't find signing key in key ring.");
+        return PGPUtils.readSecretKey(input);
     }
 }
